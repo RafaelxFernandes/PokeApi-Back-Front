@@ -1,0 +1,22 @@
+<div class="container row">
+	<div class="col s12 offset-s2">
+		<h1> Bem-vindo! </h1>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col s12 m8 offset-l2">
+			<p> Esse negócio aqui é só para mostrar para vocês não terem medo do angular ou de programação em geral. Pensem que vocês são como deuses fazendo isso aqui, mas de vez em quando ocorre uns probleminhas, mas não é nada que vocês não sejam capazes de resolver. Dito isso a mega dica que eu dou é: sempre que estiverem indo incluir algo que pode dar problema no projeto deem o <strong>git push</strong>. O git não vai comer vocês e caso vocês incluam algo que dê merda, é só ir lá no repositório que o projeto vai tá lá, lindo e maravilho. </p>
+			<p> Boa sorte com o Treinamento o/</p>
+		</div>
+	</div>
+	<h4>Trainers</h4>
+	<div *ngFor="let trainer of trainers; let i = index">
+		<p>Nome: {{trainer.nome}}</p> 
+		<p>Número de Identificação: {{trainer.codigo}}</p> 
+		<p>Pokémon Inicial: {{trainer.pokemon}}</p>
+		<button (click)="killTrainer(i)">Delete trainer</button>
+		<p>_______________________________________________________________</p>
+	</div>
+</div>

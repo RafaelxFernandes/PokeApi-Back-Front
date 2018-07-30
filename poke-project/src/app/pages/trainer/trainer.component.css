@@ -1,0 +1,40 @@
+img{	
+	padding-top: 2vh;
+	height: 50vh;
+}
+
+p, strong{
+	font-family: 'Monda', sans-serif;
+	font-size: 1.1em;
+}
+
+app-botao{
+	padding-bottom: 4vh;
+}
+
+.row{
+	text-align: center;
+	margin: 0vh 10vh;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 500px) {
+	img{
+		height: 480px;
+	}
+
+	p, strong{
+		font-size: 27px;
+	}
+
+}
+
+@media screen and (max-width: 1024px) and (min-width: 800px) {
+
+	img{
+    	height: 500px;
+  	}
+
+  	p, strong{
+  		font-size: 29px;
+  	}
+}

@@ -1,0 +1,23 @@
+<nav>
+  <div class="nav-wrapper red darken-4">
+    <a href="#" class="left brand-logo"><img src="assets/pokedex.png" width="150" height="auto"></a>
+    <div id="nav-mobile" >
+	    <ul class="right hide-on-small-only">
+	    	<li class="texto" routerLinkActive="active"><a routerLink="/home">Home</a></li>
+			<li routerLinkActive="active"><a routerLink="/pokemons">Pokemons</a></li>
+			<li routerLinkActive="active"><a routerLink="/berries">Berries</a></li>
+			<li routerLinkActive="active"><a routerLink="/trainer">Treinador</a></li>
+	    </ul>
+	    <ul class="right hide-on-med-and-up">
+	    	<li><a materialize="sideNav" [materializeParams]="[{edge:'right',closeOnClick: true}]" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a></li>
+	    </ul>
+	</div>
+  </div>
+</nav>
+
+<ul id="slide-out" class="side-nav fixed hide-on-med-and-up">
+	<li routerLinkActive="active"><a routerLink="/home" id="tab" class="black-text">Home</a></li>
+	<li routerLinkActive="active"><a routerLink="/pokemons" id="tab" class="black-text">Pokemons</a></li>
+	<li routerLinkActive="active"><a routerLink="/berries" id="tab" class="black-text">Berries</a></li>
+	<li routerLinkActive="active"><a routerLink="/trainer" id="tab" class="black-text">Treinador</a></li>	
+</ul>

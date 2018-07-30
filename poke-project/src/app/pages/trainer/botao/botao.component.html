@@ -1,0 +1,146 @@
+<button class="waves-effect waves-light btn" (click)="abreModal()">Cadastre-se</button>
+
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" 
+	[materializeActions]="modalActions">
+	<div class="modal-content">
+		<h4>Cadastro</h4>
+		<div class="row">
+			<form #login="ngForm" (ngSubmit)="onSubmit(login)" class="col l12">
+				<div class="row">
+					<div class="input-field col l4 m12 s12">
+						<input id="nome" type="text" name="nome" ngModel required #nome="ngModel"
+							maxlength="23">
+						<label for="nome">Nome</label>
+					</div>
+					<div class="input-field col l4 m12 s12">
+						<input id="idade" type="text" name="idade" ngModel required #idade="ngModel" 
+							maxlength="2" (blur)="checkIdade(idade)">
+						<label for="idade">Idade</label>
+					</div>
+					<div class="input-field col l4 m12 s12">
+						<input id="numeroId" type="number" name="numeroId" ngModel required 
+							#numeroId="ngModel" (blur)="checkNumeroId(numeroId)">
+						<label for="numeroId">Número de Identificação</label>
+					</div>
+					<div class="input-field col l6 m12 s12">
+						<input id="email" type="email" name="email" ngModel required email #email="ngModel">
+						<label for="email">E-mail</label>
+					</div>
+					<div class="input-field col l6 m12 s12">
+						<input id="pokemon" type="text" name="pokemon" ngModel required #pokemon="ngModel" 
+							(blur)="checkPokemon(pokemon)">
+						<label for="pokemon">Pokémon Inicial</label>
+					</div>
+					<div *ngIf="pokemons">
+						<!--Imagem demora alguns segundos para aparecer. Paciência, por favor-->
+						<img [src]="pokemons.sprites.front_default">
+					</div>
+					<div class="col l6 m12 s12">
+						<p>Escolha sua região inicial:</p>
+						<!--regiaoInicioBTN = Regiao de Inicio, Radio buttons-->
+						<p>
+							<input class="with-gap" id="kantoBTN" type="radio" name="regiaoInicioBTN"
+								ngModel value="1" required #regiaoInicioBTN="ngModel">
+							<label for="kantoBTN">Kanto</label>
+						</p>
+						<p>
+							<input class="with-gap" id="johtoBTN" type="radio" name="regiaoInicioBTN"
+								ngModel value="2">
+							<label for="johtoBTN">Johto</label>
+						</p>
+						<p>
+							<input class="with-gap" id="hoennBTN" type="radio" name="regiaoInicioBTN"
+								ngModel value="3">
+							<label for="hoennBTN">Hoenn</label>
+						</p>
+						<p>
+							<input class="with-gap" id="sinnohBTN" type="radio" name="regiaoInicioBTN"
+								ngModel value="4">
+							<label for="sinnohBTN">Sinnoh</label>
+						</p>
+						<p>
+							<input class="with-gap" id="unovaBTN" type="radio" name="regiaoInicioBTN"
+								ngModel value="5">
+							<label for="unovaBTN">Unova</label>
+						<p>
+							<input class="with-gap" id="kalosBTN" type="radio" name="regiaoInicioBTN"
+								ngModel value="6">
+							<label for="kalosBTN">Kalos</label>
+						</p>
+						<p>
+							<input class="with-gap" id="alolaBTN" type="radio" name="regiaoInicioBTN"
+								ngModel value="7">
+							<label for="alolaBTN">Alola</label>
+						</p>
+					</div>
+					<div class="col l6 m12 s12">
+						<p>Onde quer ir depois?: (opcional)</p>
+						<!--regiaoFuturoCHK = Regiao que sera visitada no futuro, Checkboxes-->
+						<p>
+							<input id="kantoCHK" type="checkbox" name="regiaoFuturoCHK"
+								ngModel #regiaoFuturoCHK="ngModel" [disabled]="regiaoInicioBTN.value==1">
+							<label for="kantoCHK">Kanto</label>
+						</p>
+						<p>
+							<input id="johtoCHK" type="checkbox" name="regiaoFuturoCHK" 
+								[disabled]="regiaoInicioBTN.value==2">
+							<label for="johtoCHK">Johto</label>
+						</p>
+						<p>
+							<input id="hoennCHK" type="checkbox" name="regiaoFuturoCHK"
+								[disabled]="regiaoInicioBTN.value==3">
+							<label for="hoennCHK">Hoenn</label>
+						</p>
+						<p>
+							<input id="sinnohCHK" type="checkbox" name="regiaoFuturoCHK"
+								[disabled]="regiaoInicioBTN.value==4">
+							<label for="sinnohCHK">Sinnoh</label>
+						</p>
+						<p>
+							<input id="unovaCHK" type="checkbox" name="regiaoFuturoCHK"
+								[disabled]="regiaoInicioBTN.value==5">
+							<label for="unovaCHK">Unova</label>
+						<p>
+							<input id="kalosCHK" type="checkbox" name="regiaoFuturoCHK"
+								[disabled]="regiaoInicioBTN.value==6">
+							<label for="kalosCHK">Kalos</label>
+						</p>
+						<p>
+							<input id="alolaCHK" type="checkbox" name="regiaoFuturoCHK"
+								[disabled]="regiaoInicioBTN.value==7">
+							<label for="alolaCHK">Alola</label>
+						</p>
+					</div>
+				</div>
+				<div *ngIf="(nome.invalid && nome.touched) || (idade.invalid && idade.touched)
+					|| (numeroId.invalid && numeroId.touched) || (email.invalid && email.touched)
+					|| (pokemon.invalid && pokemon.touched)">
+					<p id="ErrorMSG">Campo(s) obrigatório(s)</p>
+				</div>
+				<div *ngIf="idadeError && idade.dirty">
+					<p id="ErrorMSG">É necessário ter no mínimo 10 anos para iniciar uma jornada.</p>
+				</div>
+				<div *ngIf="numeroIdError && numeroId.dirty">
+					<p id="ErrorMSG">Número de Identificação deve ter exatamente 8 caracteres.</p>
+				</div>
+				<div *ngIf="email.invalid && email.dirty">
+					<p id="ErrorMSG">E-mail não foi escrito corretamente.</p>
+				</div>
+				<div *ngIf="pokemonsError">
+					<p id="ErrorMSG">Pokémon Inválido</p>
+				</div>
+				<div *ngIf="nome.valid && idade.valid && numeroId.valid && email.valid && pokemon.valid
+					&& regiaoInicioBTN.untouched">
+					<p id="ErrorMSG">Região inicial não foi selecionada.</p>
+				</div>
+				<div class="row" id="start">
+					<button (click)="onClick()" class="waves-effect waves-light btn" type="submit"
+						[disabled]="login.invalid || numeroIdError">Iniciar Jornada</button>
+				</div>
+			</form>
+		</div>		
+	</div>
+	<div class="modal-footer">
+		<a class="waves-effect waves-green btn-flat" (click)="fechaModal()">Close</a>
+	</div>
+</div>
